@@ -22,14 +22,15 @@ const ArrowLeft = document.querySelector(".arrow_left");
 
 const dots = document.querySelector(".dots");
 const dot = document.querySelectorAll(".dot");
+console.log(dot.length)
 
-const dotSelected = document.querySelector(".dot_selected");
+
 
 let bannerImg = document.querySelector(".banner-img");
 bannerImgIndex = 0;
 
-let tagLineSlide = document.querySelector("p").innerHTML = `<p> ${slides.tagLine} </p>`
-tagLineSlide = 0
+let tagLineSlide = document.querySelector("p");
+let tagLineSlideIndex = 0
 
 for (let i = 0; i < slides.length; i++) {
 	const dot = document.createElement("div");
@@ -37,18 +38,25 @@ for (let i = 0; i < slides.length; i++) {
 	dot.className = ("dot");
 }
 
+const dotSelected = document.querySelector(".dot_selected");
+let dotSelectedIndex = 0
+
+
 ArrowRight.addEventListener("click", () => {
 	bannerImgIndex < slides.length - 1 ? bannerImgIndex++ : bannerImgIndex = 0;
-	console.log(bannerImgIndex)
+	bannerImg.src = slides[bannerImgIndex].image;
 
+	tagLineSlideIndex < slides.length - 1 ? tagLineSlideIndex++ : tagLineSlideIndex = 0;
+	tagLineSlide.innerHTML = `<p> ${slides[tagLineSlideIndex].tagLine} </p>`
 });
 
 ArrowLeft.addEventListener("click", () => {
-	if (bannerImgIndex < slides.length) {
-		bannerImgIndex--
-		bannerImg.src = slides[bannerImgIndex].image;
-		console.log(bannerImgIndex)
-	}
+	bannerImgIndex < slides.length ? bannerImgIndex-- : bannerImgIndex = 3;
+	bannerImg.src = slides[bannerImgIndex].image;
+	console.log(bannerImgIndex)
+
+	tagLineSlideIndex < slides.length ? tagLineSlideIndex-- : null;
+	tagLineSlide.innerHTML = `<p> ${slides[tagLineSlideIndex].tagLine} </p>`
 });
 
 
