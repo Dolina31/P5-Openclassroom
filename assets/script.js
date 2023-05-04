@@ -44,13 +44,19 @@ function updateCaroussel() {
 		if (i == dotSelectedIndex) {
 			dots.children[i].classList.add("dot_selected")
 		}
+
+		dot.addEventListener("click", () => {
+			bannerImgIndex = i;
+			tagLineSlideIndex = i;
+			dotSelectedIndex = i;
+			updateCaroussel();
+		})
+
+		bannerImg.src = slides[bannerImgIndex].image;
+		tagLineSlide.innerHTML = `<p> ${slides[tagLineSlideIndex].tagLine} </p>`;
 	}
-	bannerImg.src = slides[bannerImgIndex].image;
-	tagLineSlide.innerHTML = `<p> ${slides[tagLineSlideIndex].tagLine} </p>`
 }
 updateCaroussel()
-
-
 
 ArrowRight.addEventListener("click", () => {
 	bannerImgIndex = bannerImgIndex < slides.length - 1 ? bannerImgIndex + 1 : 0;
@@ -65,5 +71,3 @@ ArrowLeft.addEventListener("click", () => {
 	dotSelectedIndex = dotSelectedIndex == 0 ? slides.length - 1 : dotSelectedIndex - 1;
 	updateCaroussel();
 });
-
-
